@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 LatLng UPV = new LatLng(latitude, longitude);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UPV, 15));
 
+
+
             }else{
                 gps.showSettingsAlert();
             }
@@ -173,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.ranking) {
@@ -193,6 +196,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
 
