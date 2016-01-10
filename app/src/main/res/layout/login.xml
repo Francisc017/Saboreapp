@@ -26,10 +26,11 @@
         android:id="@+id/button"
         android:layout_columnSpan="4"
         android:layout_gravity="center_horizontal|top"
-        android:clickable="false"
+        android:clickable="true"
         android:textColor="#fff"
         android:background="@drawable/face"
-        android:onClick="inicio" />
+        android:onClick="inicio"
+        android:enabled="true" />
 
     <Button
         android:id="@+id/button2"
@@ -37,6 +38,8 @@
         android:layout_gravity="center_horizontal|top"
         android:onClick="inicio"
         android:textColor="#fff"
-        android:background="@drawable/google" />
+        android:background="@drawable/google"
+        android:enabled="true"
+        android:clickable="true" />
 
 </GridLayout>

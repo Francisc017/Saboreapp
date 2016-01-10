@@ -30,7 +30,10 @@
         android:onClick="iniciar"
         android:textColor="#fff"
         android:background="#457DD7"
-        android:layout_width="136dp" />
+        android:layout_width="136dp"
+        android:layout_height="39dp"
+        android:clickable="true"
+        android:enabled="true" />
 
     <Button
         android:text="@string/asList"
@@ -39,6 +42,10 @@
         android:layout_gravity="center_horizontal|top"
         android:onClick="lista"
         android:backgroundTint="#4452A8"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:enabled="true" />
 
 </GridLayout>

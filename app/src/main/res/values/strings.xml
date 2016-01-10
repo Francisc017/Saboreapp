@@ -6,7 +6,6 @@
     <string name="bienvenido">¡Bienvenido!</string>
     <string name="app_id">1529958383983370</string>
     <string name="next_offer">Oferta Siguiente</string>
-<<<<<<< HEAD
     <string name="parse_id_app">9Rr6G9zplmzi8uBV0cvROtrFfrv1C3itUs5DLzIT</string>
     <string name="parse_client_id">JgyWYWBgmXNdXFpc25HlQJZ8ch9dNC9MIyAriTvs</string>
 
@@ -14,9 +13,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-=======
     <string name="logo">Saboreapp Logo</string>
     <string name="asMap">Ver como Mapa</string>
     <string name="asList">Ver como Lista</string>
->>>>>>> origin/master
 </resources>
