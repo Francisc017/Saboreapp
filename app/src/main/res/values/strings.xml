@@ -19,6 +19,14 @@
     <string name="title_activity_mark_info">default name</string>
     <string name="rating">CALIFICACION DE LOS USUARIOS</string>
     <string name="info">Info</string>
-    <string name="more_info">More Info</string>
+    <string name="more_info">Más Información</string>
+    <string name="marker_title">default</string>
+    <string name="address">Direccion</string>
+    <string name="week_hours">Lun-Vie</string>
+    <string name="saturday_hours">Sábado</string>
+    <string name="sunday_hours">Domingo</string>
+    <string name="Schedule">Horarios</string>
+    <string name="phone">Teléfono</string>
+    <string name="action_favorite">Agregar a favoritos</string>
     <item name="title_activity_mark_info" type="id">default</item>
 </resources>

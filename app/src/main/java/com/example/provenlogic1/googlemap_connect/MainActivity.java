@@ -1,6 +1,7 @@
 package com.example.provenlogic1.googlemap_connect;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,7 +9,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,19 +37,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleMap.OnMarkerClickListener {
 
     private ListView lista;
     private Map<Marker, Locales> locales;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Inicialización de bd
         ParseObject.registerSubclass(Locales.class);
         Parse.initialize(this, getString(R.string.parse_id_app), getString(R.string.parse_client_id));
+
         setContentView(R.layout.activity_main);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //menu lateral
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -143,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 // call an activity(xml file)
                                 Intent I = new Intent(MainActivity.this, Lista.class);
                                 startActivity(I);
+
                             }
 
                         });
@@ -151,13 +167,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-
+            googleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
 
         }
 
 
 
+    }
+    /**
+     * handle marker click event
+     */
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        try{
+
+
+            //obtener datos del marcador actual
+            String title = marker.getTitle();
+            marker.hideInfoWindow();
+            String id= marker.getId();
+            locales.get(marker).getDescripcion();
+
+            //obtiene tamaño de pantalla
+            int screenSize = findViewById(R.id.main_screen).getHeight();
+            int mMapHeight = findViewById(R.id.map_wrapper).getHeight();
+
+
+            if(mMapHeight > (Integer)(3*screenSize)/4){ //on full map
+
+                //creacion de activity_mark oculto
+                findViewById(R.id.map_wrapper).getLayoutParams().height = (Integer)((mMapHeight)/3);
+                //crea action bar
+                Toolbar infoToolbar = (Toolbar) findViewById(R.id.marker_toolbar);
+                setSupportActionBar(infoToolbar);
+                getSupportActionBar().setTitle(marker.getTitle());
+                getSupportActionBar().setIcon(R.drawable.burger_marker_toolbar);
+
+                //centrar vista en marker actual
+                LatLng marker_position=marker.getPosition();
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker_position, 15));
+
+                //muestra layout final
+                findViewById(R.id.main_screen).requestLayout();
+
+            }else{//on dwarfed map
+                findViewById(R.id.map_wrapper).getLayoutParams().height = mMapHeight*3;
+                findViewById(R.id.main_screen).requestLayout();
+            }
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 
     @Override
@@ -197,7 +258,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    protected void setInfo(){
 
+    }
 
 
 
