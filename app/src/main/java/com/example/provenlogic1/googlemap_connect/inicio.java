@@ -26,7 +26,7 @@ public class inicio extends Activity{
 
         // Close the activity so the user won't able to go back this
         // activity pressing Back button
-        finish();
+        //finish();
     }
     public void lista(View view) {
         Intent mainIntent = new Intent().setClass(
@@ -37,7 +37,7 @@ public class inicio extends Activity{
 
         // Close the activity so the user won't able to go back this
         // activity pressing Back button
-        finish();
+        //finish();
     }
 
 

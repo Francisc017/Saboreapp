@@ -29,4 +29,8 @@
     <string name="phone">Teléfono</string>
     <string name="action_favorite">Agregar a favoritos</string>
     <item name="title_activity_mark_info" type="id">default</item>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ratethis">Califica este lugar</string>
 </resources>

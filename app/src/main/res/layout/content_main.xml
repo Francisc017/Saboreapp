@@ -15,19 +15,32 @@
         android:id="@+id/map_wrapper"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent">
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:name="com.google.android.gms.maps.MapFragment" />
+
+
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:name="com.google.android.gms.maps.MapFragment" />
+
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/map_info"
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:orientation="vertical">
 
-        <include layout="@layout/activity_mark_info" />
+       <!-- <include layout="@layout/activity_mark_info" />  -->
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.example.provenlogic1.googlemap_connect.Marker_info"
+            android:id="@+id/info_fragment"
+            android:layout_gravity="bottom" />
+
 
     </LinearLayout>
 

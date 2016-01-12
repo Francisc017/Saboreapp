@@ -14,6 +14,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ListView lista;
     private Map<Marker, Locales> locales;
+    private Marker clicked_marker;
 
 
 
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.inflateMenu(R.menu.main);
         //menu lateral
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
 
     }
@@ -169,12 +172,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             googleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
+            googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+                @Override
+                public void onMapClick(LatLng point) {
+                    closeMap();
+
+                }
+            });
+
 
         }
 
 
 
     }
+
+    private void closeMap() {
+        System.out.println("map clicked");
+        //obtiene tamaño de pantalla
+        int screenSize = findViewById(R.id.main_screen).getHeight();
+        int mMapHeight = findViewById(R.id.map_wrapper).getHeight();
+
+        if(mMapHeight > (Integer)(3*screenSize)/4) {
+
+        }
+        else{
+            findViewById(R.id.map_wrapper).getLayoutParams().height = mMapHeight*3;
+            findViewById(R.id.main_screen).requestLayout();
+        }
+    }
+
+
     /**
      * handle marker click event
      */
@@ -184,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
             //obtener datos del marcador actual
-            String title = marker.getTitle();
             marker.hideInfoWindow();
             String id= marker.getId();
             locales.get(marker).getDescripcion();
@@ -193,28 +221,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int screenSize = findViewById(R.id.main_screen).getHeight();
             int mMapHeight = findViewById(R.id.map_wrapper).getHeight();
 
+            //crea action bar
+            Toolbar infoToolbar = (Toolbar) findViewById(R.id.marker_toolbar);
+            setSupportActionBar(infoToolbar);
+            getSupportActionBar().setTitle(marker.getTitle());
+            getSupportActionBar().setIcon(R.drawable.burger_marker_toolbar);
+
+            //centrar vista en marker actual
+            LatLng marker_position=marker.getPosition();
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker_position, 15));
 
             if(mMapHeight > (Integer)(3*screenSize)/4){ //on full map
-
-                //creacion de activity_mark oculto
                 findViewById(R.id.map_wrapper).getLayoutParams().height = (Integer)((mMapHeight)/3);
-                //crea action bar
-                Toolbar infoToolbar = (Toolbar) findViewById(R.id.marker_toolbar);
-                setSupportActionBar(infoToolbar);
-                getSupportActionBar().setTitle(marker.getTitle());
-                getSupportActionBar().setIcon(R.drawable.burger_marker_toolbar);
-
-                //centrar vista en marker actual
-                LatLng marker_position=marker.getPosition();
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker_position, 15));
-
-                //muestra layout final
-                findViewById(R.id.main_screen).requestLayout();
-
             }else{//on dwarfed map
-                findViewById(R.id.map_wrapper).getLayoutParams().height = mMapHeight*3;
-                findViewById(R.id.main_screen).requestLayout();
+                //findViewById(R.id.map_wrapper).getLayoutParams().height = mMapHeight*3;
             }
+
+            findViewById(R.id.main_screen).requestLayout();
+
             return true;
         }catch(Exception e){
             return false;
@@ -229,6 +253,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+
+
 
     }
 
@@ -262,6 +288,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void marker_info_start(View view) {
+        Intent mainIntent = new Intent().setClass(
+                MainActivity.this, Marker_info_full.class);
+        startActivity(mainIntent);
 
+
+        // Close the activity so the user won't able to go back this
+        // activity pressing Back button
+        //finish();
+    }
 
 }
