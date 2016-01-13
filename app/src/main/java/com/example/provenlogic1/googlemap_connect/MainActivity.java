@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 
         //Inicialización de bd
-        ParseObject.registerSubclass(Locales.class);
-        Parse.initialize(this, getString(R.string.parse_id_app), getString(R.string.parse_client_id));
+        //ParseObject.registerSubclass(Locales.class);
+        //Parse.initialize(this, getString(R.string.parse_id_app), getString(R.string.parse_client_id));
 
         setContentView(R.layout.activity_main);
 
@@ -143,8 +143,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             locales.clear();
-            DatabaseManager db = new DatabaseManager();
-            for (Locales loc : db.getBusinesses()) {
+            DatabaseManager db = new DatabaseManager(this);
+            List<Locales> lista_locales = db.getBusinesses();
+            for (Locales loc : lista_locales) {
                 BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.burger);
                 Marker marker = googleMap.addMarker(new MarkerOptions()
                         .position(new LatLng(loc.getLatitud(),loc.getLongitud()))
