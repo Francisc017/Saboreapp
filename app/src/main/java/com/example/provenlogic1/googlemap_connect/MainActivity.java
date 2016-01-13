@@ -143,26 +143,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             locales.clear();
-            DatabaseManager db = new DatabaseManager();
-            for (Locales loc : db.getBusinesses()) {
-                BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.burger);
-                Marker marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(loc.getLatitud(),loc.getLongitud()))
-                        .title(loc.getName())
-                        .snippet(loc.getDescripcion())
-                        .icon(icon));
-                googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(Marker arg0) {
-                        // call an activity(xml file)
-                        Intent I = new Intent(MainActivity.this, Lista.class);
-                        startActivity(I);
+            ParseQuery<Locales> query = new ParseQuery<Locales>("Locales");
 
+            query.findInBackground(new FindCallback<Locales>() {
+                @Override
+                public void done(List<Locales> objects, ParseException e) {
+                    for (Locales loc : objects) {
+                        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.burger);
+                        Marker marker = googleMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(Double.parseDouble(loc.getString("Latitud")),Double.parseDouble(loc.getString("Longitud"))))
+                                .title(loc.getString("Nombre"))
+                                .snippet(loc.getString("Descripcion"))
+                                .icon(icon));
+                        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                            @Override
+                            public void onInfoWindowClick(Marker arg0) {
+                                // call an activity(xml file)
+                                Intent I = new Intent(MainActivity.this, Lista.class);
+                                startActivity(I);
+
+                            }
+
+                        });
+                        locales.put(marker, loc);
                     }
+                }
+            });
 
-                });
-                locales.put(marker, loc);
-            }
             googleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
             googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
