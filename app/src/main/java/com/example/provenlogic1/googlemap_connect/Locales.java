@@ -15,7 +15,7 @@ public class Locales extends ParseObject{
     }
 
     public Double getLatitud(){
-        return getDouble("Latitud");
+        return Double.parseDouble(getString("Latitud"));
     }
 
     public void setLatitud(String lat){
@@ -23,7 +23,7 @@ public class Locales extends ParseObject{
     }
 
     public Double getLongitud(){
-        return getDouble("Longitud");
+        return Double.parseDouble(getString("Longitud"));
     }
 
     public void setLongitud(String lon){

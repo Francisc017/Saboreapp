@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Saboreapp.iml" filepath="$PROJECT_DIR$/Saboreapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Saboreappv2.iml" filepath="$PROJECT_DIR$/Saboreappv2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

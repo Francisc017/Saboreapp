@@ -39,8 +39,8 @@ public class Lista extends ListActivity {
             public void done(List<Locales> objects, ParseException e) {
                 for (Locales loc : objects) {
                     Locales newlocal = new Locales();
-                    newlocal.setName(loc.getName());
-                    newlocal.setDescripcion(loc.getDescripcion());
+                    newlocal.setName(loc.getString("Nombre"));
+                    newlocal.setDescripcion(loc.getString("Descripcion"));
                     loca.add(newlocal);
                 }
                 lv.setAdapter(new ArrayAdapter<Locales>(Lista.this, android.R.layout.simple_expandable_list_item_1, loca));
