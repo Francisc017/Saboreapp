@@ -28,4 +28,16 @@ public class login extends Activity {
         finish();
     }
 
+    public void test(View view) {
+        Intent mainIntent = new Intent().setClass(
+                login.this, Lista.class);
+
+        startActivity(mainIntent);
+
+
+        // Close the activity so the user won't able to go back this
+        // activity pressing Back button
+        finish();
+    }
+
 }

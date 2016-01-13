@@ -1,6 +1,7 @@
 package com.example.provenlogic1.googlemap_connect;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by Felipe on 11-01-2016.
  */
-public class DatabaseManager extends Application{
+public class DatabaseManager {
     private ParseObject users;
     private ParseObject business;
     private ParseObject favorites;
@@ -22,9 +23,9 @@ public class DatabaseManager extends Application{
 
     private List<Locales> locales;
 
-    public DatabaseManager(){
+    public DatabaseManager(Context context){
         ParseObject.registerSubclass(Locales.class);
-        Parse.initialize(this, String.valueOf(R.string.parse_id_app), String.valueOf(R.string.parse_client_id));
+        Parse.initialize(context, String.valueOf(R.string.parse_id_app), String.valueOf(R.string.parse_client_id));
 
     }
 
