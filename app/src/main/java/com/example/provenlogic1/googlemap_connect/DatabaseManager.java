@@ -2,20 +2,14 @@ package com.example.provenlogic1.googlemap_connect;
 
 import android.app.Application;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Felipe on 11-01-2016.
@@ -23,7 +17,7 @@ import java.util.Map;
 public class DatabaseManager extends Application{
     private ParseObject users;
     private ParseObject business;
-    private ParseObject favourites;
+    private ParseObject favorites;
     private ParseObject offers;
 
     private List<Locales> locales;
@@ -62,7 +56,7 @@ public class DatabaseManager extends Application{
         return null;
     }
 
-    public List<Favorites> getFavorites(Usuario user){
+    public List<Favorites> getFavorites(User user){
         return null;
     }
 }
