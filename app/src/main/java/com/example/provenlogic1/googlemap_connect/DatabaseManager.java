@@ -57,4 +57,12 @@ public class DatabaseManager extends Application{
         });
         return locales;
     }
+
+    public List<Comments> getComments(Locales local){
+        return null;
+    }
+
+    public List<Favorites> getFavorites(Usuario user){
+        return null;
+    }
 }
